@@ -1,20 +1,22 @@
-import matriz from "../matriz"
 import { Card, Box} from "@mui/material";
 import data from '../resp.json'
 
-const mat = []
+let mat = []
 
 
 function Casilla(params) {
+    const letra = params.valor;
+
     if (params.valor !== '0')
         return <Card sx={{ m: 0.3, p: 0.5, backgroundColor: 'lightblue', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            <input id='entrada' type='text' maxLength='1' />
+            <input id='entrada' type='text' maxLength='1' defaultValue={letra}/>
         </Card>
     return <Card sx={{ m: 0.3, p: 0.5, backgroundColor: 'black', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
     </Card>
 }
 
 function init_matriz() {
+    mat = []
     for (let x = 0; x < 12; x++) {
         const rows = []
         for (let y = 0; y < 12; y++) {
@@ -36,7 +38,7 @@ function put_word(word,x,y,pos) {
 
     for (let i = 0; i < word.length; i++) {
         const letra = word[i];
-        mat[x + dx*i][y + dy*i] = letra
+        mat[y + dy*i][x + dx*i] = letra
     }
 }
 
@@ -53,9 +55,9 @@ function Crucigrama(params) {
     init_matriz()
     put_words()
 
-    // console.log(mat);
 
-    matriz.forEach(row => {
+
+    mat.forEach(row => {
         const aux = row.map(value => <Casilla valor={value} />)
         rows.push(aux)
     });
@@ -69,6 +71,3 @@ function Crucigrama(params) {
 export default Crucigrama
 
 
-// recorre las filas de la matriz
-
-// por cada fila crea una fila de Cards

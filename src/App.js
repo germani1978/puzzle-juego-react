@@ -1,27 +1,45 @@
-import * as React from 'react';
-import listaH from './listaH';
-import listaV from './listaV';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import Targeta from './Component/Targeta';
 import TargetaLista from './Component/TargetaLista';
 import Crucigrama from './Component/Crucigrama';
 import Grid from '@mui/material/Unstable_Grid2';
 import Barra from './Component/Barra'
-import Init from './Init';
+import data from './resp.json'
 
 
 
 function App() {
 
-  Init()
+  const [listaH, setListaH] = useState([])
+  const [listaV, setListaV] = useState([])
+  const [cargando, setCargando] = useState(true)
+
+  useEffect(() => {
+
+    if (cargando) {
+      data.forEach(elem => {
+        let question = elem.question
+        if (elem.orientacion === 'H') {
+          setListaH([...listaH, question])
+          
+        } else {
+          setListaV([...listaH, question])
+        }
+      })
+    }
+
+    setCargando(false)
+    
+  },[listaH,listaV, cargando])
 
   return (
     <div className="App">
 
-      <Grid  spacing={1} container justifyContent="center" >
+      <Grid spacing={1} container justifyContent="center" >
 
-        <Grid container xs={12} sx={{mb:2}}>
-          <Barra/>
+        <Grid container xs={12} sx={{ mb: 2 }}>
+          <Barra />
         </Grid>
 
         <Grid container xs={11}>
@@ -55,3 +73,27 @@ function App() {
 export default App;
 
 
+/**
+ * 
+ * 
+ * 
+ * function FriendStatusWithCounter(props) {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    document.title = `You clicked ${count} times`;
+  });
+
+  const [isOnline, setIsOnline] = useState(null);
+  useEffect(() => {
+    function handleStatusChange(status) {
+      setIsOnline(status.isOnline);
+    }
+
+    ChatAPI.subscribeToFriendStatus(props.friend.id, handleStatusChange);
+    return () => {
+      ChatAPI.unsubscribeFromFriendStatus(props.friend.id, handleStatusChange);
+    };
+  });
+  // ...
+}
+ */

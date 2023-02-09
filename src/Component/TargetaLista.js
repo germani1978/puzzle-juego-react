@@ -1,8 +1,9 @@
 import { Card, Container, Typography } from "@mui/material"
-import data from '../resp.json'
 
 
 export default function TargetaLista(params) {
+
+    console.log(params.lista);
 
     const listItem = params.lista.map(
         (elem => <p className="parrafo">
