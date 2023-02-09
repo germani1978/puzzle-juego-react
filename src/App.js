@@ -7,10 +7,14 @@ import TargetaLista from './Component/TargetaLista';
 import Crucigrama from './Component/Crucigrama';
 import Grid from '@mui/material/Unstable_Grid2';
 import Barra from './Component/Barra'
+import Init from './Init';
 
 
 
 function App() {
+
+  Init()
+
   return (
     <div className="App">
 

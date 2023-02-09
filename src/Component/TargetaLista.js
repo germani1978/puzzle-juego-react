@@ -1,4 +1,6 @@
 import { Card, Container, Typography } from "@mui/material"
+import data from '../resp.json'
+
 
 export default function TargetaLista(params) {
 
