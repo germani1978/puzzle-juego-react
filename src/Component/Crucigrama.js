@@ -1,18 +1,29 @@
-import { Card, Box} from "@mui/material";
+import { Card, Box, Typography } from "@mui/material";
 import data from '../resp.json'
 
 let mat = []
 
-
-function Casilla(params) {
-    const letra = params.valor;
-
-    if (params.valor !== '0')
-        return <Card sx={{ m: 0.3, p: 0.5, backgroundColor: 'lightblue', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            <input id='entrada' type='text' maxLength='1' defaultValue={letra}/>
+function FondoAzul(params) {
+   return <Card sx={{ m: 0.3, p: 0.5, position:'relative' , backgroundColor: 'lightblue', display: 'flex',  justifyContent: 'center', alignItems: 'center' }}>
+            <input id='entrada' type='text' maxLength='1' />
+            if (params.num) <Typography sx={{position:'absolute', top:0, left:0, fontSize:'0.7rem'}}>{params.num}</Typography>
         </Card>
+}
+
+function FondoNegro() {
     return <Card sx={{ m: 0.3, p: 0.5, backgroundColor: 'black', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
     </Card>
+}
+
+
+
+
+function Casilla(params) {
+
+    if (params.valor !== '0') {
+        return <FondoAzul num={params.num}/>
+    }
+    return <FondoNegro/>
 }
 
 function init_matriz() {
@@ -26,19 +37,19 @@ function init_matriz() {
     }
 }
 
-function put_word(word,x,y,pos) {
+function put_word(word, x, y, pos) {
     let dx = 0;
     let dy = 0;
 
     if (pos === 'H') {
         dx = 1;
-    }else{
+    } else {
         dy = 1;
     }
 
     for (let i = 0; i < word.length; i++) {
         const letra = word[i];
-        mat[y + dy*i][x + dx*i] = letra
+        mat[y + dy * i][x + dx * i] = letra
     }
 }
 
@@ -58,7 +69,7 @@ function Crucigrama(params) {
 
 
     mat.forEach(row => {
-        const aux = row.map(value => <Casilla valor={value} />)
+        const aux = row.map(value => <Casilla valor={value}  />)
         rows.push(aux)
     });
 

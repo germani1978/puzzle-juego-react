@@ -15,23 +15,27 @@ function App() {
   const [listaV, setListaV] = useState([])
   const [cargando, setCargando] = useState(true)
 
+
+
   useEffect(() => {
 
     if (cargando) {
+      let arregloH = []
+      let arregloV = []
       data.forEach(elem => {
-        let question = elem.question
-        if (elem.orientacion === 'H') {
-          setListaH([...listaH, question])
-          
-        } else {
-          setListaV([...listaH, question])
+        if (elem.orientacion === "H") {
+          arregloH = [...arregloH,elem.question]
+        }else {
+          arregloV = [...arregloV,elem.question]
         }
       })
+      setListaH(arregloH)
+      setListaV(arregloV)
+      setCargando(false)
     }
 
-    setCargando(false)
-    
-  },[listaH,listaV, cargando])
+
+  }, [listaH, listaV, cargando])
 
   return (
     <div className="App">

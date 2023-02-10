@@ -3,12 +3,10 @@ import { Card, Container, Typography } from "@mui/material"
 
 export default function TargetaLista(params) {
 
-    console.log(params.lista);
-
     const listItem = params.lista.map(
-        (elem => <p className="parrafo">
-                    <Typography sx={{display:'inline',fontWeight:'bold'}} variant="body1">{elem.num+') '}</Typography>
-                    <Typography sx={{display:'inline'}}  variant="caption">{elem.pre}</Typography>
+        ((elem,index) => <p className="parrafo">
+                    <Typography sx={{display:'inline',fontWeight:'bold'}} variant="body1">{index+')'}</Typography>
+                    <Typography sx={{display:'inline'}}  variant="caption">{elem+' '}</Typography>
                 </p>)
     )
 
@@ -18,7 +16,9 @@ export default function TargetaLista(params) {
                     Preguntas { params.horizontal ? 'Horizontales': 'Verticales'}
                 </Typography>
 
-                <Container>{listItem}</Container>
+                <Container>
+                    {listItem}
+                </Container>
 
             </Card>
 }
