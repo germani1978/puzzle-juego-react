@@ -11,31 +11,28 @@ import data from './resp.json'
 
 function App() {
 
-  const [listaH, setListaH] = useState([])
-  const [listaV, setListaV] = useState([])
+  const [ListaP,setListaP] = useState([])
   const [cargando, setCargando] = useState(true)
 
 
-
+  // llevando data(tesp.json) a arreglo
   useEffect(() => {
 
     if (cargando) {
-      let arregloH = []
-      let arregloV = []
+      let arreglo = []
       data.forEach(elem => {
         if (elem.orientacion === "H") {
-          arregloH = [...arregloH,elem.question]
+          arreglo = [...arreglo,{ 'question':elem.question, 'pos':'H', 'num': elem.n }]
         }else {
-          arregloV = [...arregloV,elem.question]
+          arreglo = [...arreglo,{ 'question':elem.question, 'pos':'V', 'num': elem.n }]
         }
       })
-      setListaH(arregloH)
-      setListaV(arregloV)
+      setListaP(arreglo)
       setCargando(false)
     }
 
 
-  }, [listaH, listaV, cargando])
+  }, [ListaP, cargando])
 
   return (
     <div className="App">
@@ -54,18 +51,18 @@ function App() {
             </Grid>
           </Grid>
 
-          <Grid container xs={4.5}>
+          <Grid container xs={5}>
             <Grid xs={12} sx={{ display: 'flex', justifyContent: "center" }}>
               <Crucigrama />
             </Grid>
           </Grid>
 
-          <Grid xs={3}>
-            <TargetaLista lista={listaH} horizontal={true} />
+          <Grid xs={2.5}>
+            <TargetaLista lista={ListaP} horizontal={false} />
           </Grid>
 
-          <Grid xs={3}>
-            <TargetaLista lista={listaV} horizontal={false} />
+          <Grid xs={2.5}>
+            <TargetaLista lista={ListaP} horizontal={true} />
           </Grid>
 
         </Grid>
