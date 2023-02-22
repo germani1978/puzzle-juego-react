@@ -3,14 +3,16 @@ import { Card, Container, Typography } from "@mui/material"
 
 export default function TargetaLista(params) {
 
+    const lista = params.lista
+
     let tipo = 'H'
     if (!params.horizontal) tipo = "V"
 
-    let preguntas = params.lista.filter( elem => {  return elem.pos === tipo;  })
+    let preguntas = lista.filter( elem => {  return elem.pos === tipo;  })
 
     const listItem = preguntas.map(
-        ((elem,index) => <p className="parrafo">
-                    <Typography sx={{display:'inline',fontWeight:'bold'}} variant="body1">{elem.num+') '}</Typography>
+        ((elem) => <p className="parrafo">
+                    <Typography sx={{display:'inline',fontWeight:'bold'}} variant="body1">{elem.num+')'}</Typography>
                     <Typography sx={{display:'inline'}}  variant="caption">{elem.question+' '}</Typography>
                 </p>)
     )

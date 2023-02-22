@@ -1,5 +1,4 @@
 import { Card, Box, Typography } from "@mui/material";
-import data from '../resp.json'
 
 let mat = []
 
@@ -52,31 +51,32 @@ function put_word(word, x, y, pos,num) {
     }
 }
 
-function put_words() {
-    let num = 0
-    data.forEach(elem => {
-        put_word(elem.word, elem.cord.x, elem.cord.y, elem.orientacion, num)
-        if (num === 11) console.log(elem.word, elem.cord.x, elem.cord.y);
-        num++
+function put_words(lista) {
+    console.log('cruzi',lista);
+    lista.forEach(elem => {
+        put_word(elem.word, elem.x, elem.y, elem.pos, elem.num)
     });
 }
 
 
 function Crucigrama(params) {
+
+
+
+
     const rows = []
 
-    init_matriz()
-    put_words()
+    init_matriz()              //crea e inicializa la matriz mat
+    put_words(params.lista)    //pone las palabras en la matriz mat
 
-
-
-    mat.forEach(row => {
+    mat.forEach(row => {       //crea 12x12 casillas de cards con el contenido de la letra y el numero
         const aux = row.map(value => <Casilla letra={value.letra} num={value.num} />)
         rows.push(aux)
     });
 
-    return <Box sx={{ width: 600, height: 600, display: 'grid', gridTemplateColumns: 'repeat(12,1fr)', }}>
-        {rows}
+    //crea una grilla de 12x12 con todas la cards anteriores
+    return <Box sx={{ width: 600, height: 600, display: 'grid', gridTemplateColumns: 'repeat(12,1fr)', }}> 
+        {rows} 
     </Box>
 
 }
